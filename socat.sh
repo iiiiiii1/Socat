@@ -65,9 +65,9 @@ start_socat(){
     else
     source /etc/os-release &>/dev/null
     if [[ "${ID}" == "debian" && ${VERSION_ID} -ge 9 ]];then
-    echo -e "${OK} ${GreenBG} 当前系统为 Debian ${VERSION_ID} ${Font} "
+    echo -e "${Green}检测到Debian${VERSION_ID}无/etc/rc.local自启，正在为其配置... ${Font} "
     elif [[ "${ID}" == "ubuntu" && `echo "${VERSION_ID}" | cut -d '.' -f1` -ge 18 ]];then
-    echo -e "${OK} ${GreenBG} 当前系统为 Ubuntu ${VERSION_ID} ${Font} "
+    echo -e "$${Green}检测到Ubuntu${VERSION_ID}无/etc/rc.local自启，正在为其配置... ${Font} "
         echo "[Unit]
         Description=/etc/rc.local
         ConditionPathExists=/etc/rc.local
