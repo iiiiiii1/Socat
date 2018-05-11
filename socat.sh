@@ -65,6 +65,7 @@ start_socat(){
     else
     source /etc/os-release &>/dev/null
     if [[ "${ID}" == "debian" && ${VERSION_ID} -ge 9 ]];then
+    elif [[ "${ID}" == "ubuntu" && `echo "${VERSION_ID}" | cut -d '.' -f1` -ge 18 ]];then
         echo "[Unit]
         Description=/etc/rc.local
         ConditionPathExists=/etc/rc.local
