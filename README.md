@@ -1,6 +1,6 @@
 Socat一键安装脚本
 -----------
-支持CentOS 6/7 、Debian 7+、Ubuntu 14+
+支持CentOS 6+ 、Debian 7+、Ubuntu 14+
 
 使用root运行以下命令：
 
