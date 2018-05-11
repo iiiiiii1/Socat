@@ -2,6 +2,14 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 
+# ====================================================
+#	System Request:CentOS 6+ 、Debian 7+、Ubuntu 14+
+#	Author:	Rat's
+#	Dscription: Socat一键脚本
+#	Version: 1.0
+#	Blog: https://www.moerats.com
+# ====================================================
+
 Green="\033[32m"
 Font="\033[0m"
 Blue="\033[33m"
