@@ -115,9 +115,9 @@ start_socat(){
     sleep 3
     echo
     echo -e "${Green}Socat安装并配置成功!${Font}"
-    echo -e "${Blue}你的本地端口为: ${port1}${Font}"
-    echo -e "${Blue}你的远程端口为: ${port2}${Font}"
-    echo -e "${Blue}你的本地服务器IP为: ${ip}${Font}"
+    echo -e "${Blue}你的本地端口为:${port1}${Font}"
+    echo -e "${Blue}你的远程端口为:${port2}${Font}"
+    echo -e "${Blue}你的本地服务器IP为:${ip}${Font}"
     exit 0
 }
 
