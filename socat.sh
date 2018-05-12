@@ -49,6 +49,13 @@ function disable_selinux(){
     fi
 }
 
+function disable_iptables(){
+    systemctl stop firewalld.service >/dev/null 2>&1
+    systemctl disable firewalld.service >/dev/null 2>&1
+    service iptables stop >/dev/null 2>&1
+    chkconfig iptables off >/dev/null 2>&1
+}
+
 get_ip(){
     ip=`curl http://whatismyip.akamai.com`
 }
@@ -71,11 +78,8 @@ start_socat(){
         " >> /etc/rc.d/rc.local
         chmod +x /etc/rc.d/rc.local
     else
-    source /etc/os-release &>/dev/null
-    if [[ "${ID}" == "debian" && ${VERSION_ID} -ge 9 ]];then
-    echo -e "${Green}检测到【Debian ${VERSION_ID}】无/etc/rc.local自启，正在为其配置... ${Font} " >/dev/null 2>&1
-    elif [[ "${ID}" == "ubuntu" && `echo "${VERSION_ID}" | cut -d '.' -f1` -ge 17 ]];then
-    echo -e "${Green}检测到【Ubuntu ${VERSION_ID}】无/etc/rc.local自启，正在为其配置... ${Font} " >/dev/null 2>&1
+    if [ -s /etc/rc.local ]; then
+    echo -e "${Green}检测到系统无/etc/rc.local自启，正在为其配置... ${Font} "
         echo "[Unit]
         Description=/etc/rc.local
         ConditionPathExists=/etc/rc.local
@@ -118,10 +122,6 @@ start_socat(){
         chmod +x /etc/rc.local
     fi
     fi
-    systemctl stop firewalld.service >/dev/null 2>&1
-    systemctl disable firewalld.service >/dev/null 2>&1
-    service iptables stop >/dev/null 2>&1
-    chkconfig iptables off >/dev/null 2>&1
     get_ip
     sleep 3
     echo
@@ -168,4 +168,5 @@ start_socat
 checkos;
 rootness;
 disable_selinux;
+disable_iptables;
 status_socat;
