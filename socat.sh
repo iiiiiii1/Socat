@@ -78,8 +78,7 @@ start_socat(){
         nohup socat -T 600 UDP4-LISTEN:${port1},reuseaddr,fork UDP4:${socatip}:${port2}  >> /root/socat.log 2>&1 &
         " >> /etc/rc.d/rc.local
         chmod +x /etc/rc.d/rc.local
-    else
-    if [ -s /etc/rc.local ]; then
+    elif [ -s /etc/rc.local ]; then
         sed -i '/exit/d' /etc/rc.local
         echo "nohup socat TCP4-LISTEN:${port1},reuseaddr,fork TCP4:${socatip}:${port2} >> /root/socat.log 2>&1 &
         nohup socat -T 600 UDP4-LISTEN:${port1},reuseaddr,fork UDP4:${socatip}:${port2}  >> /root/socat.log 2>&1 &
@@ -122,7 +121,6 @@ start_socat(){
         chmod +x /etc/rc.local
         systemctl enable rc-local >/dev/null 2>&1
         systemctl start rc-local >/dev/null 2>&1
-    fi
     fi
     get_ip
     sleep 3
