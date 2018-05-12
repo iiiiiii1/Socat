@@ -84,7 +84,6 @@ start_socat(){
         nohup socat -T 600 UDP4-LISTEN:${port1},reuseaddr,fork UDP4:${socatip}:${port2}  >> /root/socat.log 2>&1 &
         " >> /etc/rc.local
         chmod +x /etc/rc.local
- 
     else
     echo -e "${Green}检测到系统无rc.local自启，正在为其配置... ${Font} "
         echo "[Unit]
