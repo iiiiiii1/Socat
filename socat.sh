@@ -15,14 +15,14 @@ Green="\033[32m"
 Font="\033[0m"
 Blue="\033[33m"
 
-function rootness(){
+rootness(){
     if [[ $EUID -ne 0 ]]; then
        echo "Error:This script must be run as root!" 1>&2
        exit 1
     fi
 }
 
-function checkos(){
+checkos(){
     if [[ -f /etc/redhat-release ]];then
         OS=CentOS
     elif cat /etc/issue | grep -q -E -i "debian";then
@@ -43,14 +43,14 @@ function checkos(){
     fi
 }
 
-function disable_selinux(){
+disable_selinux(){
     if [ -s /etc/selinux/config ] && grep 'SELINUX=enforcing' /etc/selinux/config; then
         sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
         setenforce 0
     fi
 }
 
-function disable_iptables(){
+disable_iptables(){
     systemctl stop firewalld.service >/dev/null 2>&1
     systemctl disable firewalld.service >/dev/null 2>&1
     service iptables stop >/dev/null 2>&1
@@ -147,7 +147,7 @@ install_socat(){
     fi
 }
 
-function status_socat(){
+status_socat(){
     if [ -s /usr/bin/socat ]; then
     echo -e "${Green}检测到Socat已存在，并跳过安装步骤！${Font}"
         main_x
@@ -157,18 +157,22 @@ function status_socat(){
 }
 
 main_x(){
+checkos
+rootness
+disable_selinux
+disable_iptables
 config_socat
 start_socat
 }
 
 main_y(){
+checkos
+rootness
+disable_selinux
+disable_iptables
 install_socat
 config_socat
 start_socat
 }
 
-checkos;
-rootness;
-disable_selinux;
-disable_iptables;
-status_socat;
+status_socat
