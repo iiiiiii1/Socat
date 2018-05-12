@@ -79,7 +79,7 @@ start_socat(){
         chmod +x /etc/rc.d/rc.local
     else
     if [ -s /etc/rc.local ]; then
-    echo -e "${Green}检测到系统无/etc/rc.local自启，正在为其配置... ${Font} "
+        echo -e "${Green}检测到系统无/etc/rc.local自启，正在为其配置... ${Font} "
         echo "[Unit]
         Description=/etc/rc.local
         ConditionPathExists=/etc/rc.local
