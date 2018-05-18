@@ -85,7 +85,7 @@ start_socat(){
         " >> /etc/rc.local
         chmod +x /etc/rc.local
     else
-    echo -e "${Green}检测到系统无rc.local自启，正在为其配置... ${Font} "
+echo -e "${Green}检测到系统无rc.local自启，正在为其配置... ${Font} "
 echo "[Unit]
 Description=/etc/rc.local
 ConditionPathExists=/etc/rc.local
@@ -117,9 +117,9 @@ echo "#!/bin/sh -e
 echo "nohup socat TCP4-LISTEN:${port1},reuseaddr,fork TCP4:${socatip}:${port2} >> /root/socat.log 2>&1 &
 nohup socat -T 600 UDP4-LISTEN:${port1},reuseaddr,fork UDP4:${socatip}:${port2}  >> /root/socat.log 2>&1 &
 " >> /etc/rc.local
-    chmod +x /etc/rc.local
-    systemctl enable rc-local >/dev/null 2>&1
-    systemctl start rc-local >/dev/null 2>&1
+chmod +x /etc/rc.local
+systemctl enable rc-local >/dev/null 2>&1
+systemctl start rc-local >/dev/null 2>&1
     fi
     get_ip
     sleep 3
